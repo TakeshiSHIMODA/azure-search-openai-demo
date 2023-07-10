@@ -9,8 +9,8 @@ export type ExampleModel = {
 
 const EXAMPLES: ExampleModel[] = [
     {
-        text: "EVとBEVの違いはなんですか",
-        value: "EVとBEVの違いはなんですか"
+        text: "ハイブリッド車の高出力化の課題は？",
+        value: "ハイブリッド車の高出力化の課題は？"
     },
     { 
         text: "BEVの開発にはどのような課題がありますか", 
