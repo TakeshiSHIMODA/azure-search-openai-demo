@@ -1,24 +1,14 @@
+
 {
-  "routes": [
-      {
-          "route": "/.auth/login/twitter",
-          "statusCode": 404
-      },
-      {
-          "route": "/.auth/login/github",
-          "statusCode": 404
-      },
-      {
-          "route": "/*",
-          "allowedRoles": [
-              "authenticated"
-          ]
-      }
-  ],
-  "responseOverrides": {
-      "401": {
-          "statusCode": 302,
-          "redirect": "/.auth/login/aad"
-      }
+  "networking": {
+    "allowedIpRanges": [
+      "218.216.187.218/32",
+      "218.216.187.219/32",
+      "218.216.190.208/29",
+      "219.121.148.66/32",
+      "219.121.148.67/32",
+      "219.121.148.216/29",
+      "133.192.188.0/24"
+    ]
   }
 }
