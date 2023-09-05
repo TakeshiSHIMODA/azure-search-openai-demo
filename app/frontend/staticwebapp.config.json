@@ -1,39 +1,13 @@
-
 {
-  "$schema": "https://json.schemastore.org/staticwebapp.config.json" ,
   "auth": {
     "identityProviders": {
       "azureActiveDirectory": {
         "registration": {
-          "openIdIssuer": "https://login.microsoftonline.com/69405920-b673-4f7c-8845-e124e9d08af2/v2.0",
+          "openIdIssuer": "https://login.microsoftonline.com/<TENANT_ID>/v2.0",
           "clientIdSettingName": "AZURE_CLIENT_ID",
           "clientSecretSettingName": "AZURE_CLIENT_SECRET"
         }
       }
-    }
-  },
-  "routes": [
-    {
-      "route": "/login",
-      "redirect": "/.auth/login/aad"
-    },
-    {
-      "route": "/logout",
-      "redirect": "/.auth/logout"
-    },
-    {
-      "route": "/.auth/login/aad/callback",
-      "redirect": "/"
-    },
-    {
-      "route": "/*",
-      "allowedRoles": ["authenticated"]
-    }
-  ],
-  "responseOverrides": {
-    "401": {
-      "redirect": "/login",
-      "statusCode": 302
     }
   }
 }
