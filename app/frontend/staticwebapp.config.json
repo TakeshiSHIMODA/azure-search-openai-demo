@@ -1,26 +1,6 @@
+
 {
-  "routes": [
-      {
-          "route": "/.auth/login/twitter",
-          "statusCode": 404
-      },
-      {
-          "route": "/.auth/login/github",
-          "statusCode": 404
-      },
-      {
-          "route": "/*",
-          "allowedRoles": [
-              "authenticated"
-          ]
-      }
-  ],
-  "responseOverrides": {
-      "401": {
-          "statusCode": 302,
-          "redirect": "/.auth/login/aad"
-      }
-  },
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json" ,
   "auth": {
     "identityProviders": {
       "azureActiveDirectory": {
@@ -31,6 +11,29 @@
         }
       }
     }
+  },
+  "routes": [
+    {
+      "route": "/login",
+      "redirect": "/.auth/login/aad"
+    },
+    {
+      "route": "/logout",
+      "redirect": "/.auth/logout"
+    },
+    {
+      "route": "/.auth/login/aad/callback",
+      "redirect": "/"
+    },
+    {
+      "route": "/*",
+      "allowedRoles": ["authenticated"]
+    }
+  ],
+  "responseOverrides": {
+    "401": {
+      "redirect": "/login",
+      "statusCode": 302
+    }
   }
 }
-
