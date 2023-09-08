@@ -17,6 +17,10 @@
           "redirect": "/.auth/logout"
       },
       {
+          "route": "/.auth/login/aad/callback",
+          "redirect": "/"
+      },
+      {
           "route": "/*",
           "allowedRoles": [
               "authenticated"
