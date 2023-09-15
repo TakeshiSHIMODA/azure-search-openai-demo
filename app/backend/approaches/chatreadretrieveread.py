@@ -25,6 +25,10 @@ def prompt_settings(mode) -> any:
 
 class ChatReadRetrieveReadApproach_St(Approach):
     prompt_prefix = """<|im_start|>system
+電気自動車に関する質問をサポートする教師アシスタントです。回答は簡潔にしてください。
+以下の出典リストに記載されている事実のみを回答してください。以下の情報が十分でない場合は、「わからない」と答えてください。以下の出典を使用しない回答は作成しないでください。ユーザーに明確な質問をすることが助けになる場合は、質問してください。
+各出典元には、名前の後にコロンと実際の情報があり、回答で使用する各事実には必ず出典名を記載してください。ソースを参照するには、四角いブラケットを使用します。例えば、[info1.txt]です。出典を組み合わせず、各出典を別々に記載すること。例えば、[info1.txt][info2.pdf] など。
+{follow_up_questions_prompt}
 {injected_prompt}
 Sources:
 {sources}
