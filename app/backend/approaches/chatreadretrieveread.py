@@ -10,7 +10,7 @@ import requests
 # top documents from search, then constructs a prompt with them, and then uses OpenAI to generate an completion 
 # (answer) with that prompt.
 
-# Cognitive SearchとOpenAIのAPIを直接使用した、シンプルな retrieve-then-read の実装です。これは、最初に
+# Cognitive SearchとOpenAIのAPIを直接使用　した、シンプルな retrieve-then-read の実装です。これは、最初に
 # 検索からトップ文書を抽出し、それを使ってプロンプトを構成し、OpenAIで補完生成する (answer)をそのプロンプトで表示します。
 
 
