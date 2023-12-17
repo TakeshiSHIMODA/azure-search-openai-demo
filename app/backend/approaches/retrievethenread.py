@@ -50,6 +50,7 @@ Answer:
 
         #prompt = (overrides.get("prompt_template") or self.template).format(q=q, retrieved=content)
         prompt = "You are a translation assistant. Please answer by translating the characters you entered into English. Please write your answers in English only."
+        prompt = prompt + " Question: '" + q + "'"
         completion = openai.Completion.create(
             engine=self.openai_deployment, 
             prompt=prompt, 
