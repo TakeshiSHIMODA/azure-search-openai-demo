@@ -47,35 +47,15 @@ Answer:
         self.content_field = content_field
 
     def run(self, q: str, overrides: dict) -> any:
-        use_semantic_captions = True if overrides.get("semantic_captions") else False
-        top = overrides.get("top") or 3
-        exclude_category = overrides.get("exclude_category") or None
-        filter = "category ne '{}'".format(exclude_category.replace("'", "''")) if exclude_category else None
 
-        if overrides.get("semantic_ranker"):
-            r = self.search_client.search(q, 
-                                        filter=filter,
-                                        query_type=QueryType.SEMANTIC, 
-                                        query_language="ja-jp", 
-                                        query_speller="none", 
-                                        semantic_configuration_name="default", 
-                                        top=top, 
-                                        query_caption="extractive|highlight-false" if use_semantic_captions else None)
-        else:
-            r = self.search_client.search(q, filter=filter, top=top)
-        if use_semantic_captions:
-            results = [doc[self.sourcepage_field] + ": " + nonewlines(" . ".join([c.text for c in doc['@search.captions']])) for doc in r]
-        else:
-            results = [doc[self.sourcepage_field] + ": " + nonewlines(doc[self.content_field]) for doc in r]
-        content = "\n".join(results)
-
-        prompt = (overrides.get("prompt_template") or self.template).format(q=q, retrieved=content)
+        #prompt = (overrides.get("prompt_template") or self.template).format(q=q, retrieved=content)
+        prompt = "You are a translation assistant. Please answer by translating the characters you entered into English. Please write your answers in English only."
         completion = openai.Completion.create(
             engine=self.openai_deployment, 
             prompt=prompt, 
             temperature=overrides.get("temperature") or 0.3, 
-            max_tokens=1024, 
+            max_tokens=2048, 
             n=1, 
             stop=["\n"])
 
-        return {"data_points": results, "answer": completion.choices[0].text, "thoughts": f"Question:<br>{q}<br><br>Prompt:<br>" + prompt.replace('\n', '<br>')}
+        return {"data_points": "", "answer": completion.choices[0].text, "thoughts": f"Question:<br>{q}<br><br>Prompt:<br>" + prompt.replace('\n', '<br>')}
